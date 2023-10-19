@@ -1,4 +1,5 @@
 import csv
+import os
 import time
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
@@ -7,7 +8,7 @@ from flask import Flask, request, url_for, session, redirect
 app = Flask(__name__)
 
 app.config['SESSION_COOKIE_NAME'] = 'Spotify Cookie'
-app.secret_key = 'SDFGSDF5423543ujkhkjh123%$^&%^&'
+app.secret_key = os.getenv("SECRET_KEY")
 TOKEN_INFO = 'token_info'
 
 @app.route('/')
@@ -78,8 +79,8 @@ def get_token():
 
 def create_spotify_oauth():
     return SpotifyOAuth(
-        client_id = '0d8706cb19c748f0ab71ffe4debdb081',
-        client_secret = '62efa5d166734906aa692e11aa62194f',
+        client_id = os.getenv("CLIENT_ID"),
+        client_secret = os.getenv("CLIENT_SECRET"),
         redirect_uri = url_for('redirect_page', _external=True),
         scope='user-library-read playlist-modify-public playlist-modify-private'
     )
