@@ -15,7 +15,6 @@ app.config['SESSION_COOKIE_NAME'] = 'Spotify Cookie'
 app.secret_key = os.getenv("SECRET_KEY")
 TOKEN_INFO = 'token_info'
 
-# Function to create a SpotifyOAuth object
 def create_spotify_oauth():
     return SpotifyOAuth(
         client_id=os.getenv("CLIENT_ID"),
@@ -60,44 +59,42 @@ def save_discover_weekly():
 
     scamPlaylist = sp.playlist_items(spotify_scam_id)
 
-    # Prepare data for rendering in the template
     song_details = []
     for song in scamPlaylist['items']:
         track_name = song['track']['name']
-        string_without_spaces = re.sub(r'\s', '', track_name)
+        artist_name = song['track']['album']['artists'][0]['name']
+        search_name = track_name + ' ' + artist_name
+        string_without_spaces = re.sub(r'\s', '+', search_name)
         search_keyword = string_without_spaces
-        html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + search_keyword)
+        cleaned_string = re.sub(r'[^A-Za-z0-9\s]', '', search_keyword)
+        cleaned_string += '(audio)' 
+        html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + cleaned_string)
         video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
-        song_details.append({'track_name': track_name, 'link': "https://www.youtube.com/watch?v=" + video_ids[0]})
+        song_details.append({'track_name': track_name, 'link': "https://www.youtube.com/watch?v=" + video_ids[1]})
     
     for savedSong in song_details:
         
         url = savedSong['link']
 
-        # Download the video
         try:
             yt = YouTube(url)
             stream = yt.streams.get_highest_resolution()
-            stream.download()
+            stream.download(output_path='temp', filename=savedSong['track_name']+'.mp4')
 
-            video_title = yt.title.replace(".", "")
-            print(stream.title, video_title)
-            # Extract the audio
-            video = VideoFileClip(video_title+'.mp4')
+            video = VideoFileClip( 'temp/' + savedSong['track_name']+'.mp4')
             audio = video.audio
-            audio.write_audiofile(video_title+'.mp3')
+            audio.write_audiofile('music/'+savedSong['track_name']+'.mp3')
             video.close()
         except:
             continue
-        # Delete the downloaded video file
         
 
         retries = 0
         max_retries = 5
         while retries < max_retries:
             try:
-                os.remove(video_title+'.mp4')
-                break  # Download succeeded, exit the loop
+                os.remove('temp/' +savedSong['track_name']+'.mp4')
+                break  
             except PermissionError:
                 print(f"File is in use. Retrying in {3} seconds...")
                 time.sleep(3)
