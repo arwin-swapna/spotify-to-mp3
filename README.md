@@ -53,4 +53,6 @@ Follow these steps to set up and run the **Where's My Music** project:
 
 ## Disclaimer
 
+This project is designed to help you download music from Spotify playlists, but it may not always be 100% accurate. Due to variations in song titles, artist names, and availability on YouTube, the program might occasionally download incorrect songs or fail to find certain tracks. 
+
 This project is for educational and personal use only. Downloading copyrighted material without the necessary permissions may infringe on intellectual property rights and may be subject to legal restrictions in your jurisdiction. Be responsible and use this application in compliance with applicable laws and regulations. The project's creators and maintainers are not responsible for any misuse of this software.
