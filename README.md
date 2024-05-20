@@ -1,12 +1,12 @@
-# Where's My Music - README
+# Spotify To MP3
 
 ## Project Overview
 
-**Where's My Music** is a Python application that allows you to retrieve and download your favorite songs from a Spotify playlist as MP3 files. It seamlessly integrates with Spotify and YouTube, enabling you to enjoy your music offline, anytime, anywhere.
+**Spotify To MP3** is a Python application that allows you to retrieve and download your favorite songs from a Spotify playlist as MP3 files. It seamlessly integrates with Spotify and YouTube, enabling you to enjoy your music offline, anytime, anywhere.
 
 ## How It Works
 
-Where's My Music works by following these steps:
+Spotify To MP3 works by following these steps:
 
 1. **Spotify Playlist Retrieval**: The application first fetches a Spotify playlist, specified by the user. The playlist is a collection of songs you want to download.
 
@@ -18,11 +18,11 @@ Where's My Music works by following these steps:
 
 ## How to Run
 
-Follow these steps to set up and run the **Where's My Music** project:
+Follow these steps to set up and run the **Spotify To MP3** project:
 
 1. **Clone the Repository**: Begin by cloning this repository to your local machine using the following command:
    ```bash
-   git clone https://github.com/yourusername/wheres-my-music.git
+   git clone https://github.com/yourusername/spotify-to-mp3.git
 2. **Set Up a Virtual Environment**: If you don't have Pipenv installed, you can install it with pip:
    ```bash
    pip install pipenv
