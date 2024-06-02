@@ -22,7 +22,7 @@ Follow these steps to set up and run the **Spotify To MP3** project:
 
 1. **Clone the Repository**: Begin by cloning this repository to your local machine using the following command:
    ```bash
-   git clone https://github.com/yourusername/spotify-to-mp3.git
+   git clone https://github.com/arwin-swapna/spotify-to-mp3.git
 2. **Set Up a Virtual Environment**: If you don't have Pipenv installed, you can install it with pip:
    ```bash
    pip install pipenv
